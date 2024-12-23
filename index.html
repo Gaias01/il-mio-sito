@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Da Gaia per Sofi</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: Times New Roman, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .hidden {
+      display: none; /* Elementi nascosti inizialmente */
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: green;
+      display: none; /* Nascosto inizialmente */
+    }
+  </style>
+</head>
+<body>
+  <h1>Benvenuta Sofi!</h1>
+  <p>Questa è una pagina magica... dove ti porterà?</p>
+  <br>
+  <hr size="3" width="50%" color="red">
+  <br>
+  <p>Iniziamo con qualcosa di facile, che ne dici?</p>
+
+  <!-- Bottone troll -->
+  <button onclick="alert('Sto tasto non serve assolutamente a nulla, trollata')">Clicca qui</button>
+  <br><br><br>
+  <!-- Tabella per i quiz -->
+  <table>
+    <tr>
+      <td>
+        <p>
+          \( 0.1\overline{3} - \left[ \frac{1}{3} - \left( 0.2 - \frac{1}{5} \right) \right] - \left[ -\frac{1}{10} - \left( -2.1 \right) \cdot (-1) \right] \)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td><em>Qual è il risultato corretto?</em></td>
+      <td>
+        <!-- Risposte radio -->
+        <input type="radio" name="risposta" value="52"> 52
+        <input type="radio" name="risposta" value="34"> 34
+        <input type="radio" name="risposta" value="25"> 25
+        <input type="radio" name="risposta" value="12"> 12
+        <button onclick="controllaRispostaRadio()">Verifica</button>
+        <p id="message-radio" class="message"></p>
+      </td>
+    </tr>
+    <tr>
+      <td><img src="immagini/immagine.jpg" alt="Cruciverba"></td>
+    <\tr>
+    <tr>
+      <td><em>Qual è la parola sottolineata?</em></td>
+      <td>
+        <!-- Input testo -->
+        <div class="container">
+          <input type="text" id="inputTesto" placeholder="Scrivi la risposta qui">
+          <button onclick="controllaRispostaTesto()">Verifica Risposta</button>
+        </div>
+        <p id="message-text" class="message"></p>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Nuova scelta che appare dopo risposta corretta -->
+  <div id="newChoice" class="hidden">
+    <h3>Hai risposto correttamente! <br>Ora è il momento dei tuoi, sudati, auguri:) </h3>
+    <p>X
+    <br>I 
+    <br>II
+    <br>I0I
+    <br>I*II
+    <br>III0I
+    <br>I0I0II
+    <br>II0II*I
+    <br>I*II0I0I
+    <br>I0III0I0I
+    <br>II*I0I*III
+    <br>II0I0I0II0I
+    <br>I0I0*0I0IIII
+    <br>I0*0I0I0I0*0I
+    <br>I0I*I0III0II0I*I
+    <br>I0II0II0II0II0I0I
+    <br>III
+    </p>
+  </div>
+
+
+  <script>
+    // Funzione per il quiz radio
+    function controllaRispostaRadio() {
+      const scelta = document.querySelector('input[name="risposta"]:checked');
+      const messageRadio = document.getElementById("message-radio"); // Messaggio dedicato al quiz radio
+      
+      // Resetta il messaggio
+      messageRadio.style.display = "none";
+      messageRadio.textContent = "";
+
+      if (!scelta) {
+        messageRadio.textContent = "Seleziona una risposta prima di continuare!";
+        messageRadio.style.display = "block";
+        messageRadio.className = "message error";
+        return;
+      }
+
+      if (scelta.value === "25") {
+        messageRadio.textContent = "Brava! Hai scritto la risposta corretta! Ora puoi continuare con la sfida!";
+        messageRadio.style.display = "block";
+        messageRadio.className = "message success";
+      } else {
+        window.location.href = 'https://it.wikipedia.org/wiki/Ignoranza'
+      }
+    }
+
+    // Funzione per il quiz con input di testo
+    function controllaRispostaTesto() {
+      const risposta = document.getElementById("inputTesto").value.trim().toLowerCase();
+      const messageText = document.getElementById("message-text"); // Messaggio dedicato al quiz testo
+      const newChoice = document.getElementById("newChoice");
+
+      // Resetta il messaggio
+      messageText.style.display = "none";
+      messageText.textContent = "";
+      newChoice.classList.add("hidden");
+      
+      if (!risposta) {
+        messageText.textContent = "Scrivi una risposta prima di continuare!";
+        messageText.style.display = "block";
+        messageText.className = "message error";
+        return;
+      }
+      if (risposta === "natale") {
+        messageText.textContent = "Brava! Hai scritto la risposta corretta! Ora puoi continuare con la sfida!";
+        messageText.style.display = "block";
+        messageText.className = "message success";
+        newChoice.classList.remove("hidden")
+      } else {
+        window.location.href = 'https://it.wikipedia.org/wiki/Pagina_principale'
+      }
+    }
+  </script>
+</body>
+</html>
+
